@@ -1,27 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { DataSource } from 'typeorm';
-import { DocumentTypeResponseDto } from './dtos/document-type-response.dto';
-import { plainToInstance } from 'class-transformer';
-// import { DocumentTypes } from '../entities/entities/document-type.entity';
 
 @Injectable()
-export class DocumentTypesService {
+export class PersonTypesService {
 
     constructor(private readonly dataSource: DataSource) { }
-
+    
     async findAll() {
+
         const sql = `
-          SELECT
+        SELECT 
             id,
             code,
             description,
-            sunat_code,
             is_active
-          FROM document_types
+          FROM person_types
         `;
+
         const rows = await this.dataSource.query(sql);
         return rows;
+       
     }
 
 }
-    

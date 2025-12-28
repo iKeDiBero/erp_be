@@ -1,6 +1,6 @@
 import { Expose, Transform } from 'class-transformer';
 
-export class DocumentTypeResponseDto {
+export class PersonTypeResponseDto {
 
     @Expose()
     id: number;

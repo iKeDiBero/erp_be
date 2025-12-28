@@ -10,9 +10,8 @@ export class DocumentTypesController {
 
     @Get()
     async findAll() {
-        
         const documentTypes =  await this.documentTypesService.findAll();
-        return plainToInstance(DocumentTypeResponseDto, documentTypes);
+        return plainToInstance(DocumentTypeResponseDto, documentTypes, { excludeExtraneousValues: true });
     }
 
 }
