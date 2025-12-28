@@ -6,6 +6,8 @@ import { AuthModule } from './auth/auth.module';
 import { HealthModule } from './health/health.module';
 import { DocumentTypesModule } from './document-types/document-types.module';
 import { PersonTypesModule } from './person-types/person-types.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
@@ -22,15 +24,17 @@ import { PersonTypesModule } from './person-types/person-types.module';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true, // Solo para desarrollo, desactivar en producción
+        synchronize: false,
       }),
       inject: [ConfigService],
     }),
     CustomersModule,
+    TasksModule,
     AuthModule,
     HealthModule,
     DocumentTypesModule,
     PersonTypesModule,
+    ScheduleModule.forRoot(),
   ],
 })
 export class AppModule {}

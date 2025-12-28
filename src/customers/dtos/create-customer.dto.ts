@@ -1,15 +1,15 @@
-import { IsBoolean, IsDecimal, IsEmail,  IsNotEmpty, IsNumber, IsString, MaxLength } from 'class-validator';
+import { IsBoolean, IsDecimal, IsEmail, IsInt, IsNotEmpty, IsNumber, IsOptional, IsString, MaxLength, Min } from 'class-validator';
 
 export class CreateCustomerDto {
 
     @IsNotEmpty()
-    @IsNumber()
-    @MaxLength(1)
+    @IsInt()
+    @Min(1)
     personTypeId: number;
-    
+
     @IsNotEmpty()
-    @IsNumber()
-    @MaxLength(1)
+    @IsInt()
+    @Min(1)
     documentTypeId: number;
 
     @IsNotEmpty()
@@ -22,32 +22,38 @@ export class CreateCustomerDto {
     @MaxLength(255)
     name: string;
 
+    @IsOptional()
     @IsString()
     @MaxLength(255)
     address?: string;
 
+    @IsOptional()
     @IsString()
     @MaxLength(6)
     ubigeo?: string;
 
+    @IsOptional()
     @IsString()
     @MaxLength(2)
     countryCode?: string;
 
+    @IsOptional()
     @IsEmail()
-    @IsString()
     @MaxLength(150)
     email?: string;
 
+    @IsOptional()
     @IsString()
     @MaxLength(20)
     phone?: string;
 
+    @IsOptional()
     @IsBoolean()
     isWithHoldingAgent?: boolean;
 
-    @IsDecimal({ force_decimal: false, decimal_digits: '5,2' })
+    @IsOptional()
+    @IsNumber({ maxDecimalPlaces: 2 })
     withHoldingRate?: number;
 
-    
+
 }

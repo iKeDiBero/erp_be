@@ -1,15 +1,20 @@
 import { Injectable } from '@nestjs/common';
+import { DataSource } from 'typeorm';
 
 @Injectable()
 export class CustomersService {
     
-    update(id: string, updateCustomerDto: any) {
-        throw new Error('Method not implemented.');
-    }
-
+    constructor(private readonly dataSource: DataSource) {}
+    
     findAll() {
         
-        return `This action returns all customers`;
+        const sql = `SELECT id, person_type_id, document_type_id, document_number, name, 
+        address, ubigeo, country_code, email, phone, is_with_holding_agent, with_holding_rate, 
+        is_active, created_at, updated_at 
+        FROM clients`;
+        
+        return this.dataSource.query(sql);
+ 
     }
 
     findOne(id: string) {
@@ -20,5 +25,8 @@ export class CustomersService {
         return `This action adds a new customer`;
     }
 
+    update(id: string, updateCustomerDto: any) {
+        throw new Error('Method not implemented.');
+    }
 
 }
